@@ -1,12 +1,12 @@
 import decode from "jwt-decode";
 
 export function getTokenExpirationDate(token) {
-  const decoded = decode(token);
+  const { exp } = decode(token);
 
-  if (!decoded.exp) return null;
+  if (!exp) return null;
 
-  const date = new Date(0);
-  date.setUTCSeconds(decoded.exp);
+  const date = new Date(0); // El 0 nos da la fecha correcta
+  date.setUTCSeconds(exp);
 
   return date;
 }

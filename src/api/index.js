@@ -17,11 +17,5 @@ export function fetchUsers(config) {
 }
 
 export function fetchNewToken(data, config) {
-  return axios.post(
-    `/refreshToken`,
-    {
-      ...data,
-    },
-    config
-  );
+  return axios.post(`/refreshToken`, data, config);
 }

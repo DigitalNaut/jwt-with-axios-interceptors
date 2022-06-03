@@ -8,7 +8,7 @@ const fs = require("./utilities");
 const verifyToken = require("./middleware");
 
 const app = express();
-app.use(logger("tiny"));
+app.use(logger("dev"));
 app.use(cors());
 app.use(express.json());
 
@@ -106,17 +106,30 @@ app.get("/users", verifyToken, async (req, res, next) => {
   }
 });
 
-app.post("/refreshToken", (req, res) => {
+app.post("/refreshToken", async (req, res) => {
   const { refreshToken } = req.body;
 
-  if (refreshToken in refreshTokens) {
-    const token = createJWT(refreshTokens[refreshToken]);
-    return res.send({ token });
+  // Check if refresh token is in active
+  if (!(refreshToken in refreshTokens)) {
+    return res.status(401).send({
+      message: "Refresh Token no válido.",
+    });
   }
 
-  res.status(401).send({
-    message: "Refresh Token no válido.",
-  });
+  // Query the DB
+  const username = refreshTokens[refreshToken];
+  const data = await fs.readFileAsync("db.json");
+  const users = JSON.parse(data).users;
+  const isUserInDB = users.find((user) => user.username === username);
+
+  // Invalidate if user not found in DB
+  if (!isUserInDB)
+    return res.status(401).send({
+      message: "Refresh Token no válido.",
+    });
+
+  const token = createJWT(username);
+  res.send({ token });
 });
 
 app.use((err, req, res, next) => {

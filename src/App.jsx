@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { fetchUsers, registerUser } from "./api";
 import "./App.css";
-import { useAuth } from "./hooks/useAuth";
-import useAxios from "./hooks/useAxios";
+import useUserAuth from "./hooks/useUserAuth";
+import usePersistentLogin from "./hooks/usePersistentLogin";
+import useAxiosInterceptors from "./hooks/useAxiosInterceptors";
 
 function App() {
-  const { user, login, logout } = useAuth();
-  useAxios(user);
+  const { user, login, logout } = useUserAuth();
+  useAxiosInterceptors(user);
+  usePersistentLogin();
 
   const [username, setUsername] = useState("");
   const [error, setError] = useState();
@@ -105,10 +107,10 @@ function App() {
               onChange={handleInput}
             />
           </form>
-          <button type="button" onClick={handleRegister}>
+          <button className="secondary" type="button" onClick={handleRegister}>
             Registrar
           </button>
-          <button type="button" onClick={handleLogin}>
+          <button className="primary" type="button" onClick={handleLogin}>
             Iniciar sesión
           </button>
         </>
@@ -117,6 +119,7 @@ function App() {
         <>
           <p>¡Hola, {user.username || "usuario desconocido"}!</p>
           <button
+            className="secondary"
             type="button"
             onClick={() => {
               setUsers();
@@ -131,14 +134,16 @@ function App() {
         <div className="gallery">
           <h2>Galería de Usuarios</h2>
           {usersError && <p className="notification error">{usersError}</p>}
-          <button type="button" onClick={getUsersList}>
+          <button className="primary" type="button" onClick={getUsersList}>
             Refrescar
           </button>
-          {users?.map((aUser) => (
-            <p key={aUser.id}>
-              {aUser.id}: {aUser.username}
-            </p>
-          ))}
+          <div className="items">
+            {users?.map((aUser) => (
+              <div className="item" key={aUser.id}>
+                {aUser.id}: {aUser.username}
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </main>

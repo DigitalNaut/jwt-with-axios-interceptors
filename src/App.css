@@ -1,35 +1,69 @@
+:root {
+  --color-iceBlue: #e5e9f0;
+  --color-blueGray-100: #434c5e;
+  --color-blueGray-200: #3b4252;
+  --color-blueGray-300: #2e3440;
+  --color-lightBlue: #7d96af;
+  --color-olive: #77997d;
+  --color-red: #b1575f;
+  --color-lightYellow: #e1c38b;
+
+  --border-radius-lg: 1em;
+  --border-radius-sm: 0.5em;
+  --border-radius-max: 9999px;
+}
+
+html,
 body {
-  display: grid;
-  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
 
   font-size: large;
+
+  background: center / cover no-repeat var(--color-blueGray-300)
+    url(https://images.unsplash.com/photo-1462556791646-c201b8241a94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1165&q=80);
+  color: var(--color-iceBlue);
 }
 
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   gap: 0.5em;
-
   margin: 1rem;
 }
 
 input {
   max-width: 20ch;
+  padding: 0.5em;
 
   font-size: large;
 }
 
 button {
-  background-color: coral;
-  color: white;
+  color: var(--color-iceBlue);
   border: none;
 
-  padding: 0.5em;
-  margin: 0.1em;
-  border-radius: 0.25em;
+  padding: 0.8em 1.2em;
+  margin: 0.25em;
+  border-radius: var(--border-radius-max);
 
   cursor: pointer;
+}
+
+button.primary {
+  background-color: var(--color-lightBlue);
+}
+
+button.secondary {
+  border: var(--color-lightBlue) 1px solid;
+  background-color: transparent;
 }
 
 button:hover {
@@ -40,37 +74,58 @@ button:hover {
   text-align: center;
   width: 80vw;
   max-width: 60ch;
-  margin: 2rem;
-  padding: 1rem;
-  
-  background-color: bisque;
 
-  border-radius: 0.5em;
+  margin: 2rem;
+  padding: 2rem;
+
+  background-color: var(--color-blueGray-200);
+  border-radius: var(--border-radius-lg);
 }
 
 .gallery {
-  background-color: beige;
-
-  margin: 0.5em;
+  margin: 1em;
   padding: 0.5em;
+
+  background-color: var(--color-blueGray-100);
+  border-radius: var(--border-radius-sm);
+}
+
+.gallery .items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 0.25em;
+  margin: 1em;
+
+  max-height: 30vh;
+  overflow-y: auto;
+}
+
+.gallery .item {
+  background-color: var(--color-blueGray-300);
+  padding: 0.5em;
+
+  border-radius: var(--border-radius-sm);
 }
 
 .notification {
-  padding: 1rem;
+  text-align: center;
   font-size: medium;
+
+  padding: 0.5rem;
+  border-radius: var(--border-radius-sm);
 }
 
 .error {
-  background-color: crimson;
-  color: white;
+  background-color: var(--color-red);
 }
 
 .warning {
-  background-color: darkgoldenrod;
-  color: white;
+  background-color: var(--color-lightYellow);
+  color: var(--color-blueGray-300);
 }
 
 .success {
-  background-color: darkolivegreen;
-  color: white;
+  background-color: var(--color-olive);
 }

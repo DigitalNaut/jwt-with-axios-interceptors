@@ -1,17 +1,18 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useAuth } from "./useAuth";
+import useUserAuth from "./useUserAuth";
 import useRefreshToken from "./useRefreshToken";
 
-export default function useAxios() {
-  const { user, logout, saveAuthentication } = useAuth();
+export default function useAxiosInterceptors() {
+  const { user, logout, saveAuthentication } = useUserAuth();
   const refresh = useRefreshToken();
 
   useEffect(() => {
-    // Permite incluir el token de sesión en cada petición
+    // Permite modificar las peticiones
     const requestInterceptor = axios.interceptors.request.use(
       (config) => {
         if (!config.headers.Authorization)
+          // Incluimos el JWT en el encabezado en todas las llamadas
           config.headers.Authorization = `Bearer ${user?.token}`;
 
         return config;
@@ -21,30 +22,29 @@ export default function useAxios() {
       }
     );
 
-    // Vuelve a intentar la previa llamada en caso de estatus 403
+    // Permite correr código en caso de una respuesta de falla como un JWT expirado
     const responseInterceptor = axios.interceptors.response.use(
       (response) => response,
       async (error) => {
+        // Obtenemos la petición anterior
         const prevRequest = error.config;
 
         if (error.response?.status === 403) {
-          prevRequest.isRetry = true;
+          // Solicitamos un nuevo JWT
+          const response = await refresh();
+          const { token } = response || {};
 
-          const { token, refreshToken } = await refresh();
-
-          // Registramos el nuevo token
+          // Registramos el nuevo JWT en el encabezado
           prevRequest.headers.Authorization = `Bearer ${token}`;
-          saveAuthentication({
-            token,
-            refreshToken,
-          });
 
-          // Realizamos la misma llamada de nuevo
+          // Realizamos la misma llamada anterior
           return axios(prevRequest);
         }
 
         if (error.response?.status === 401)
-          if (prevRequest?.url === "/refreshToken") logout(true);
+          if (prevRequest?.url === "/refreshToken")
+            // Termina la sesión si no se puede obtener otro Refresh Token
+            logout(true);
 
         return Promise.reject(error);
       }

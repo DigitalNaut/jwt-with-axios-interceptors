@@ -1,18 +1,14 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import {
-  getRefreshToken,
   getUser,
   removeRefreshToken,
   saveRefreshToken,
 } from "./jwtHelper";
 import { loginUser } from "../api";
-import useRefreshToken from "../hooks/useRefreshToken";
-// import useAxios from "../hooks/useAxios";
 
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const refresh = useRefreshToken();
   const [user, setUser] = useState();
   const [error, setError] = useState();
 
@@ -57,33 +53,6 @@ export function AuthProvider({ children }) {
 
     if (expired) setError("Tu sesión ha expirado.");
   }
-
-  useEffect(
-    function initUserSession() {
-      const refreshToken = getRefreshToken();
-      if (!refreshToken) {
-        logout();
-        return;
-      }
-
-      const controller = new AbortController();
-      (async function refreshTheToken() {
-        try {
-          const { token } = await refresh({ signal: controller.signal });
-
-          saveAuthentication({ token, refreshToken });
-        } catch (error) {
-          if (error.name === "CanceledError") return;
-
-          logout(true);
-        }
-      })();
-
-      return () => controller.abort();
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
 
   return (
     <AuthContext.Provider value={{ user, login, logout, saveAuthentication }}>
