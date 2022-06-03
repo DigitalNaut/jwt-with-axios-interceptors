@@ -16,6 +16,6 @@ export function fetchUsers(config) {
   return axios.get(`/users`, config);
 }
 
-export function fetchNewToken(data, config) {
-  return axios.post(`/refreshToken`, data, config);
+export function fetchNewToken({ refreshToken }, config) {
+  return axios.post(`/refreshToken`, { refreshToken }, config);
 }
