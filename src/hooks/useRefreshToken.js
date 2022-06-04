@@ -12,16 +12,15 @@ export default function useRefreshToken() {
       const response = await fetchNewToken({ refreshToken }, config);
       const { token } = response.data || {};
 
-      // Lo guardamos con los datos del usuario
-      saveAuthentication({
-        token,
-        refreshToken,
-      });
-
-      return {
+      const tokens = {
         token,
         refreshToken,
       };
+
+      // Lo guardamos con los datos del usuario
+      saveAuthentication(tokens);
+
+      return tokens;
     } catch (error) {
       throw error;
     }

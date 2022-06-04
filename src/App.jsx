@@ -7,7 +7,7 @@ import useAxiosInterceptors from "./hooks/useAxiosInterceptors";
 
 function App() {
   const { user, login, logout } = useUserAuth();
-  useAxiosInterceptors(user);
+  useAxiosInterceptors();
   usePersistentLogin();
 
   const [username, setUsername] = useState("");
@@ -128,23 +128,22 @@ function App() {
           >
             Cerrar sesión
           </button>
-        </>
-      )}
-      {user && (
-        <div className="gallery">
-          <h2>Galería de Usuarios</h2>
-          {usersError && <p className="notification error">{usersError}</p>}
-          <button className="primary" type="button" onClick={getUsersList}>
-            Refrescar
-          </button>
-          <div className="items">
-            {users?.map((aUser) => (
-              <div className="item" key={aUser.id}>
-                {aUser.id}: {aUser.username}
-              </div>
-            ))}
+
+          <div className="gallery">
+            <h2>Galería de Usuarios</h2>
+            {usersError && <p className="notification error">{usersError}</p>}
+            <button className="primary" type="button" onClick={getUsersList}>
+              Refrescar
+            </button>
+            <div className="items">
+              {users?.map((aUser) => (
+                <div className="item" key={aUser.id}>
+                  {aUser.id}: {aUser.username}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </main>
   );

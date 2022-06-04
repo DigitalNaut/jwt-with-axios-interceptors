@@ -17,9 +17,7 @@ export default function useAxiosInterceptors() {
 
         return config;
       },
-      (error) => {
-        Promise.reject(error);
-      }
+      (error) => Promise.reject(error)
     );
 
     // Permite correr código en caso de una respuesta de falla como un JWT expirado
