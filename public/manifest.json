@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Autorización con JWT y Axios",
+  "name": "Autorización de Usuario con JWT usando Interceptores de Axios",
   "icons": [
     {
       "src": "favicon.ico",
