@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# JWT con Interceptores de Axios en React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  <img src="./readme_icons/react.svg#gh-light-mode-only" title="React" alt="React" />
+  <img src="./readme_icons/react.svg#gh-dark-mode-only" title="React" alt="React" />
+  <img src="./readme_icons/axios.svg" title="Axios" alt="Axios" />
+  <img src="./readme_icons/jwt.svg#gh-light-mode-only" title="JSON Web Token" alt="JSON Web Token" />
+  <img src="./readme_icons/jwt.svg#gh-dark-mode-only" title="JSON Web Token" alt="JSON Web Token" />
 
-## Available Scripts
+  <p>Este repo provee una solución para la autorización del usuario en <a href="http://reactjs.org/" target="_blank">React</a> utilizando los interceptores de <a href="https://axios-http.com" target="_blank">Axios</a> para manejar los <a href="https://jwt.io/" target="_blank">JSON Web Tokens</a>.</p>
+  <p>Consulta la documentación oficial de las librerías de <a href="https://es.reactjs.org/docs/getting-started.html" target="_blank">React</a>, <a href="https://axios-http.com/docs/intro" target="_blank">Axios</a>, y <a href="https://jwt.io/introduction" target="_blank">JSON Web Token</a> para conocer más detalles de su implementación.</p>
+  <a href="https://skillsfor.womenintech.mx" target="_blank">
+    <img src="https://skillsfor.womenintech.mx/mainLogo.png" title="Skills for Women in Tech" alt="SFWIT" width="32px" height="32px" />
+  </a>
+  &nbsp;
+  <a href="https://hackademy.lat" target="_blank">
+    <img src="https://hackademy.lat/favicon.png" title="Hackademy" alt="Hackademy" width="32px" height="32px" />
+  </a>
+  &nbsp;
+  <a href="https://www.britishcouncil.org.mx" target="_blank">
+    <img src="https://www.britishcouncil.org.mx/profiles/solas2/themes/solas_ui/apple-touch-icons/touch-icon-iphone.png" title="British Council" alt="British Council" width="32px" height="32px" />
+  </a>
+</div>
 
-In the project directory, you can run:
+## Instalación
 
-### `npm start`
+```sh
+git clone "https://github.com/DigitalNaut/jwt-with-axios-interceptors" && cd jwt-with-axios-interceptors && npm i
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Corre el proyecto
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Levanta el servidor y el cliente simultáneamente con el comando:
 
-### `npm test`
+```sh
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Advertencia
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este proyecto no está configurado para correrse en un host remoto como Netlify o Heroku.
